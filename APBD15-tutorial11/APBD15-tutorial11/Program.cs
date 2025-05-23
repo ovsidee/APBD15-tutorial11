@@ -16,6 +16,9 @@ public class Program
         //adding controllers
         builder.Services.AddControllers();
         
+        //swagger
+        builder.Services.AddSwaggerGen();
+        
         // to use DI
         builder.Services.AddScoped<IDbService, DbService>();
         
@@ -32,6 +35,12 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
+            app.UseSwagger(); // <-- Включает генерацию Swagger JSON
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "APBD15 API V1");
+                options.RoutePrefix = string.Empty; // Открывает Swagger по адресу http://localhost:5000/
+            });
             app.MapOpenApi();
         }
 
