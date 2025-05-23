@@ -1,3 +1,7 @@
+using APBD15_tutorial11.Data;
+using APBD15_tutorial11.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace APBD15_tutorial11;
 
 public class Program
@@ -8,9 +12,17 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddAuthorization();
-
-        //
-        // builder.Services.AddScoped<..., ...>();
+        
+        //adding controllers
+        builder.Services.AddControllers();
+        
+        // to use DI
+        builder.Services.AddScoped<IDbService, DbService>();
+        
+        // configuration of DbContext + connectionString
+        builder.Services.AddDbContext<DatabaseContext> (options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionString"))
+        );
         
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
