@@ -9,7 +9,6 @@ public class DbService : IDbService
 {
     private readonly DatabaseContext _context;
     
-    
     public DbService(DatabaseContext context)
     {
         _context = context;
@@ -39,7 +38,7 @@ public class DbService : IDbService
         if (missingMedicaments.Any())
             return "medicamentsNotFound";
 
-        // Try to find patient by ID
+        // finding patient by ID
         Patient patient = null;
         if (request.Patient.IdPatient > 0)
         {
@@ -56,7 +55,7 @@ public class DbService : IDbService
             }
         }
 
-        // If no patient found by ID, create a new one
+        // create a new patient
         if (patient == null)
         {
             patient = new Patient
@@ -100,7 +99,6 @@ public class DbService : IDbService
 
         return "success";
     }
-
     
     public async Task<PatientDetailsDto?> GetPatientDetailsAsync(int idPatient)
     {
@@ -137,7 +135,6 @@ public class DbService : IDbService
                         }
                     }).ToList()
             }).FirstOrDefaultAsync();
-
         return patient;
     }
 }

@@ -19,7 +19,6 @@ public class PrescriptionController : ControllerBase
     public async Task<IActionResult> AddPrescription([FromBody] AddPrescriptionRequestDto request, CancellationToken cancellationToken)
     {
         var result = await _dbService.AddPrescriptionAsync(request, cancellationToken);
-
         return result switch
         {
             "success" => Created(string.Empty, "Prescription added successfully."),

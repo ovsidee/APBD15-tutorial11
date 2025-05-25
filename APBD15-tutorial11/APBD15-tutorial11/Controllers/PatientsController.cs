@@ -18,12 +18,10 @@ public class PatientsController : ControllerBase
     public async Task<IActionResult> GetPatientDetails(int id)
     {
         var patient = await _dbService.GetPatientDetailsAsync(id);
-
+        
         if (patient == null)
-        {
             return NotFound($"Patient with ID {id} not found.");
-        }
-
+        
         return Ok(patient);
     }
 }

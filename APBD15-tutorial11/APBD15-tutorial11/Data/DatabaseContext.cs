@@ -10,15 +10,12 @@ public class DatabaseContext : DbContext
     public DbSet<Medicament> Medicaments { get; set; }
     public DbSet<Prescription> Prescriptions { get; set; }
     public DbSet<PrescriptionMedicament> PrescriptionMedicaments { get; set; }
-    
     protected DatabaseContext()
     {
     }
-
     public DatabaseContext(DbContextOptions options) : base(options)
     {
     }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
